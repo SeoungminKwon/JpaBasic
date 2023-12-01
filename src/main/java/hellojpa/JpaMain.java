@@ -17,7 +17,7 @@ public class JpaMain {
 
         try{
             Member member = em.find(Member.class, 1L);
-            em.remove(member);
+            member.setName("userB");
 
             tx.commit();
         }catch (Exception e){
