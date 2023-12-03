@@ -18,11 +18,17 @@ public class JpaMain {
 
         try{
             Member member = new Member();
-            member.setId(100L);
+            member.setId(101L);
             member.setName("userTest");
             System.out.println("=== before ===");
             em.persist(member);
             System.out.println("=== after ===");
+
+            Member findMember = em.find(Member.class, 101L);
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getName() = " + findMember.getName());
+
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
