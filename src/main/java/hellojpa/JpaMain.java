@@ -17,16 +17,12 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Member member = new Member();
-            member.setId(101L);
-            member.setName("userTest");
-            System.out.println("=== before ===");
-            em.persist(member);
-            System.out.println("=== after ===");
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+            em.persist(member1);
+            em.persist(member2);
 
-            Member findMember = em.find(Member.class, 101L);
-            System.out.println("findMember.getId() = " + findMember.getId());
-            System.out.println("findMember.getName() = " + findMember.getName());
+            System.out.println("==============================");
 
 
             tx.commit();
