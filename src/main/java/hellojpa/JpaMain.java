@@ -26,16 +26,17 @@ public class JpaMain {
 
             Member refMember = em.getReference(Member.class, member1.getId());
             System.out.println("m1.getClass() = " + refMember.getClass()); //Proxy
-            refMember.getUsername();
 
-            Member findMember = em.find(Member.class, member1.getId());
-            System.out.println("reference.getClass() = " + findMember.getClass()); // Member
+//            em.detach(refMember);
+//            em.close();
+            em.clear();
 
-            System.out.println("refMember == findMember   : " + (refMember == findMember));
-
+//            refMember.getUsername();
+            System.out.println(refMember.getUsername());
 
             tx.commit();
         }catch (Exception e){
+            e.printStackTrace();
             tx.rollback();
         }finally {
             em.close();
