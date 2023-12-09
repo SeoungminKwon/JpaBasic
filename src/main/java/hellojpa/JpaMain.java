@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 
 public class JpaMain {
@@ -14,18 +16,26 @@ public class JpaMain {
 
         try{
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            em.persist(member1);
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Member refMember = em.getReference(Member.class, member1.getId());
-            System.out.println("m1.getClass() = " + refMember.getClass()); //Proxy
+            Member m = em.find(Member.class, member.getId());
 
-            refMember.getUsername();
-            System.out.println("isLoaded  : "+ emf.getPersistenceUnitUtil().isLoaded(refMember));
+            System.out.println("m = " + m.getTeam().getClass());
+
+            System.out.println("==============================");
+            System.out.println(m.getTeam().getName());
+            System.out.println("==============================");
+
 
             tx.commit();
         }catch (Exception e){
