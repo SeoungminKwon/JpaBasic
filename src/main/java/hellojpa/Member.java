@@ -20,9 +20,21 @@ public class Member{
     //Period 기간
     @Embedded
     private Period workPeriod;
-    //주소
+    //집주소
     @Embedded
     private Address homeAddress;
+
+    //직장주소
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city",
+                    column = @Column(name = "WORK_CITY")),
+            @AttributeOverride(name = "street",
+                    column = @Column(name = "WORK_STREET")),
+            @AttributeOverride(name = "zipcode",
+                    column = @Column(name = "WORK_ZIPCODE"))
+    })
+    private Address workAddress;
 
     public Long getId() {
         return id;
