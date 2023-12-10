@@ -42,4 +42,6 @@ public class Address {
     public int hashCode() {
         return Objects.hash(getCity(), getStreet(), getZipcode());
     }
+
+
 }
